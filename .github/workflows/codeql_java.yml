@@ -34,9 +34,10 @@ jobs:
         with:
           languages: 'java'
 
-      # - name: Build
-      #   run: |
-      #     ./refine build
+      - name: Build
+        run: |
+          ./refine build
+
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
