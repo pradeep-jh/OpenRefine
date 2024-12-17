@@ -5,16 +5,16 @@ on:
     branches: [ "master" ]
     paths:
       - '**/*.java' # Only trigger the workflow if Java files have changed
-      - 'runzzit' # some file to trigger the workflow
+      - 'runzzit'
       - '.github/workflows/codeql_java.yml'
-  # pull_request:
-  #   branches: [ "master" ]
-  #   paths:
-  #     - '**/*.java'
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - '**/*.java'
 
 jobs:
   analyze:
-    # if: github.repository == 'pradeep-jh/OpenRefine'
+    if: github.repository == 'pradeep-jh/OpenRefine'
     name: Analyze Java
     runs-on: ubuntu-latest
     permissions:
@@ -26,9 +26,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # provide tag here
-          # ref: refs/tags/3.8.2
-          # ref: 07dd61e
           fetch-depth: 0
       - run: git checkout 07dd61e
 
@@ -37,7 +34,55 @@ jobs:
         with:
           languages: 'java'
 
+      - name: Build
+        run: |
+          ./refine build
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
           category: "/language:java"
+
+# name: "CodeQL Java"
+
+# on:
+#   push:
+#     branches: [ "master" ]
+#     paths:
+#       - '**/*.java' # Only trigger the workflow if Java files have changed
+#       - 'runzzit' # some file to trigger the workflow
+#       - '.github/workflows/codeql_java.yml'
+#   # pull_request:
+#   #   branches: [ "master" ]
+#   #   paths:
+#   #     - '**/*.java'
+
+# jobs:
+#   analyze:
+#     # if: github.repository == 'pradeep-jh/OpenRefine'
+#     name: Analyze Java
+#     runs-on: ubuntu-latest
+#     permissions:
+#       actions: read
+#       contents: read
+#       security-events: write
+
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
+#         with:
+#           # provide tag here
+#           # ref: refs/tags/3.8.2
+#           # ref: 07dd61e
+#           fetch-depth: 0
+#       - run: git checkout 07dd61e
+
+#       - name: Initialize CodeQL
+#         uses: github/codeql-action/init@v3
+#         with:
+#           languages: 'java'
+
+#       - name: Perform CodeQL Analysis
+#         uses: github/codeql-action/analyze@v3
+#         with:
+#           category: "/language:java"
+
