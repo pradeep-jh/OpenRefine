@@ -5,6 +5,7 @@ on:
     branches: [ "master" ]
     paths:
       - '**/*.java' # Only trigger the workflow if Java files have changed
+      - 'runzzit'
   pull_request:
     branches: [ "master" ]
     paths:
