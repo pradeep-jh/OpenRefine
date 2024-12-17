@@ -24,9 +24,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
+        # with:
           # provide tag here
-          ref: refs/tags/3.8.2
+          # ref: refs/tags/3.8.2
+      - run: git checkout 07dd61e
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
