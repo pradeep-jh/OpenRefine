@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - run: git checkout 07dd61e
+      - run: git checkout 97c1969
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
